@@ -35,8 +35,9 @@
 @stop
 @section('breadcrump')
     <ul class="breadcrumb">
+        <?php $id=(isset($_GET['id'])?$_GET['id']:0); ?>
         <li><a href="{{url('/admin/')}}"><i class="icon-home2 position-left"></i> Home</a></li>
-        <li class="active"><a href="{{url('admin/markers?id='.$_GET['id'])}}">Markers</a></li>
+        <li class="active"><a href="{{url('admin/markers?id='.$id)}}">Markers</a></li>
 
     </ul>
     @stop
@@ -45,7 +46,7 @@
         @include('admin.message')
         <div class="panel panel-flat">
             <div class="panel-heading">
-                <a href="{{url('admin/markers/create?id='.$_GET['id'])}}"> <h5 class="panel-title"><i class="icon-plus-circle2"></i> Add Marker</h5></a>
+                <a href="{{url('admin/markers/create?id='.$id)}}"> <h5 class="panel-title"><i class="icon-plus-circle2"></i> Add Marker</h5></a>
                 <div class="heading-elements">
                     <ul class="icons-list">
                         <li><a data-action="collapse"></a></li>
