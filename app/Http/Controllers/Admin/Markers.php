@@ -21,7 +21,7 @@ class Markers extends Controller
     {
 
 
-        var_dump($vws->getTarget('2541103895ed401eb199c5d7c825e856'));
+        //var_dump($vws->getTarget('2541103895ed401eb199c5d7c825e856'));
 
 //$arr=array ( [status] => 201 [body] => {"result_code":"TargetCreated","transaction_id":"6a393cfa920e499bb99e7b1a70d44669","target_id":"218d81352653460d99705b170d76f888"} )
 
