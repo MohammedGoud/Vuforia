@@ -12,7 +12,7 @@
     <body>
     <div class="navbar navbar-inverse">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{url('/admin/home')}}"><img src="{{url('/')}}/assets_admin/assests/images/header-logo.png" alt=""></a>
+            <a class="navbar-brand" href="{{url('/admin/home')}}"><img src="{{url('/')}}/assets_admin/assests/images/logo_light.png" alt=""></a>
 
 
             <ul class="nav navbar-nav pull-right visible-xs-block">
