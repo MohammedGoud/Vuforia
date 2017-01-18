@@ -73,7 +73,7 @@
                                     </ul>
                                 </li>
                                 <li class=<?php echo ($controller=='markers')?"active" : ''; ?>>
-                                <a href="{{url('markers')}}"><i class="icon-grid"></i> <span>All markers</span></a>
+                                <a href="{{url('admin/markers')}}"><i class="icon-grid"></i> <span>All markers</span></a>
                                 </li>
 
                             </ul>
