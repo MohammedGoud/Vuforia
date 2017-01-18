@@ -156,7 +156,7 @@
                             <ul class="navigation navigation-main navigation-accordion">
                                 <!-- Main -->
                                 <li ><a href="{{url('admin/home')}}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
-                                <li class=<?php echo ($controller=='categories')?"active" : ''; ?>>
+                                <li class=<?php echo ($controller=='projects')?"active" : ''; ?>>
                                     <a href="#"><i class="icon-grid"></i> <span>Projects</span></a>
                                     <ul>
                                         <li> <a href="{{url('admin/projects')}}"><i class="icon-list"></i>All Projects</a></li>
@@ -169,7 +169,9 @@
 
 
 
-
+                                <li class=<?php echo ($controller=='markers')?"active" : ''; ?>>
+                                <a href="{{url('markers')}}"><i class="icon-grid"></i> <span>All markers</span></a>
+                                </li>
 
 
 
