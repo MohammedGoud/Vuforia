@@ -56,7 +56,7 @@
 @section('breadcrump')
     <ul class="breadcrumb">
         <li><a href="{{url('/admin')}}"><i class="icon-home2 position-left"></i> Home</a></li>
-        <li><a href="{{url('admin/project')}}">Projects</a></li>
+        <li><a href="{{url('admin/projects')}}">Projects</a></li>
         <li class="active">Add category</li>
     </ul>
     @stop
