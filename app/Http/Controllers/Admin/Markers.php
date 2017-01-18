@@ -62,6 +62,7 @@ class Markers extends Controller
             $ext = Input::file('image')->getClientOriginalExtension();
             $new_image = strtolower(str_random(15)) . '.' . $ext;
             rename($path . $imageName, $path . $new_image);
+            dd(url('markers/' . $new_image));
             $category->url = $new_image;
 //            $target = new \Panoscape\Vuforia\Target;
 //            $target->name = $request->name;
@@ -75,7 +76,7 @@ class Markers extends Controller
                 'path' => file_get_contents(url('markers/' . $new_image)),
                 'metadata'=>$request->meta_data
             ]);
-            dd(url('markers/' . $new_image));
+
             $atgg=json_decode($tar['body']);
             $category->target_id = $atgg->target_id;
 
