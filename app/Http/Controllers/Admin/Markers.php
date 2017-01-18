@@ -75,6 +75,7 @@ class Markers extends Controller
                 'path' => file_get_contents(url('markers/' . $new_image)),
                 'metadata'=>$request->meta_data
             ]);
+            dd(url('markers/' . $new_image));
             $atgg=json_decode($tar['body']);
             $category->target_id = $atgg->target_id;
 
