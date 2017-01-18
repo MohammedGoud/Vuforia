@@ -50,7 +50,6 @@ class Markers extends Controller
     {
 
         $category = new Marker;
-        //dd($request->input());
         $category->meta_data = $request->meta_data;
         $category->project_id = $request->project_id;
         $category->title = $request->name;
@@ -62,18 +61,11 @@ class Markers extends Controller
             $ext = Input::file('image')->getClientOriginalExtension();
             $new_image = strtolower(str_random(15)) . '.' . $ext;
             rename($path . $imageName, $path . $new_image);
-            dd(url('markers/' . $new_image));
             $category->url = $new_image;
-//            $target = new \Panoscape\Vuforia\Target;
-//            $target->name = $request->name;
-//            $target->width = 320;
-//            $target->image = file_get_contents(url('markers/' . $new_image));
-//            $target->metadata = $request->meta_data;
-//            $target->active = true;
             $tar=$vws->addTarget([
                 'name' => str_replace(' ','_',$request->name),
                 'width' => 320,
-                'path' => file_get_contents(url('markers/' . $new_image)),
+                'path' => url('markers/' . $new_image),
                 'metadata'=>$request->meta_data
             ]);
 
@@ -82,9 +74,7 @@ class Markers extends Controller
 
 
         }
-
-
-         $category->save();
+        $category->save();
         \Session::flash('addcat', 'Markers  Add Successfully  !');
         return redirect('admin/markers?id='.$request->project_id);
 
@@ -107,7 +97,7 @@ class Markers extends Controller
             $vws->updateTarget($category->target_id,
                 ['name' => str_replace(' ','_',$request->name),
                 'width' => 320,
-                'path' => file_get_contents(url('markers/' . $new_image)),
+                'path' => url('markers/' . $new_image),
                 'metadata'=>$request->meta_data
             ]);
 
