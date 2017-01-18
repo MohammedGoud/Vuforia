@@ -12,7 +12,8 @@
     <body>
     <div class="navbar navbar-inverse">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{url('/admin/home')}}"><img src="{{url('/')}}/assests_admin/assests/images/header-logo.png" alt=""></a>
+            <a class="navbar-brand" href="{{url('/admin/home')}}"><img src="{{url('/')}}/assets_admin/assests/images/header-logo.png" alt=""></a>
+
 
             <ul class="nav navbar-nav pull-right visible-xs-block">
                 <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -36,7 +37,7 @@
 
                 <li class="dropdown dropdown-user">
                     <a class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{url('/')}}/assests_admin/assests/images/placeholder.jpg" alt="">
+                        <img src="{{url('/')}}/assets_admin/assests/images/placeholder.jpg" alt="">
                         <span>{{\Session::get('emailadmin')}}</span>
                         <i class="caret"></i>
                     </a>
