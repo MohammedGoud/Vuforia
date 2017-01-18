@@ -165,6 +165,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Panoscape\Vuforia\VuforiaWebServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -231,6 +232,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'VWS' => Panoscape\Vuforia\Facades\VuforiaWebService::class,
+        'Input' => Illuminate\Support\Facades\Input::class,
 
     ],
 

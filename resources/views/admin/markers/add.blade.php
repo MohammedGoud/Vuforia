@@ -91,7 +91,12 @@
                         <div class="form-group">
                             <label class="control-label col-lg-2">Meta Data :<span class="text-danger">*</span></label>
                             <div class="col-lg-10">
-                                <input type="text" name="meta_data" class="form-control" required="required">
+                                <?php $types=array('Villa','Apartment','Home');?>
+                                <select class="form-control" name="meta_data">
+                                    @for($i=0;$i<count($types);$i++)
+                                        <option value="{{$types[$i]}}">{{$types[$i]}}</option>
+                                    @endfor
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">

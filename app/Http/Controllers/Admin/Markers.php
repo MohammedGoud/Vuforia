@@ -17,9 +17,16 @@ class Markers extends Controller
     {
         $this->middleware('adminmiddleware');
     }
-    public function index()
+    public function index(VuforiaWebService $vws)
     {
 
+//$arr=array ( [status] => 201 [body] => {"result_code":"TargetCreated","transaction_id":"6a393cfa920e499bb99e7b1a70d44669","target_id":"218d81352653460d99705b170d76f888"} )
+
+
+        //var_dump($vws->getTargets());
+
+        //print_r($tar['body']);
+        //$vws->deleteTarget('a5a1f6891785413a8987bc345f52d87d');
         if(isset($_GET['id'])) {
             $project_id=$_GET['id'];
             $categories = Marker::where('project_id','=',$project_id)->orderBy('id', 'ASC')->get();
@@ -43,6 +50,7 @@ class Markers extends Controller
     {
 
         $category = new Marker;
+        //dd($request->input());
         $category->meta_data = $request->meta_data;
         $category->project_id = $request->project_id;
         $category->title = $request->name;
@@ -55,46 +63,64 @@ class Markers extends Controller
             $new_image = strtolower(str_random(15)) . '.' . $ext;
             rename($path . $imageName, $path . $new_image);
             $category->url = $new_image;
+//            $target = new \Panoscape\Vuforia\Target;
+//            $target->name = $request->name;
+//            $target->width = 320;
+//            $target->image = file_get_contents(url('markers/' . $new_image));
+//            $target->metadata = $request->meta_data;
+//            $target->active = true;
+            $tar=$vws->addTarget([
+                'name' => str_replace(' ','_',$request->name),
+                'width' => 320,
+                'path' => file_get_contents(url('markers/' . $new_image)),
+                'metadata'=>$request->meta_data
+            ]);
+            $atgg=json_decode($tar['body']);
+            $category->target_id = $atgg->target_id;
 
 
-            $target = new \Panoscape\Vuforia\Target;
-            $target->name = $request->name;
-            $target->width = 320;
-            $target->image = file_get_contents(url('markers/' . $new_image));
-            $target->metadata = $request->meta_data;
-            $target->active = true;
-            $tar = $vws->addTarget($target);
         }
 
-        $category->vws_id = $request->name;
+
          $category->save();
         \Session::flash('addcat', 'Markers  Add Successfully  !');
         return redirect('admin/markers?id='.$request->project_id);
 
     }
-    public function destroy($id){
+      public function update(Request $request, $id,VuforiaWebService $vws)
+    {
+        $category = Marker::findOrFail($id);
+        $category->meta_data = $request->meta_data;
+        $category->project_id = $request->project_id;
+        $category->title = $request->name;
+        if($request->hasFile('image')) {
+            $path = public_path() . '/markers/';
+            $file = Input::file('image');
+            $imageName = $file->getClientOriginalName();
+            $file->move($path, $imageName);
+            $ext = Input::file('image')->getClientOriginalExtension();
+            $new_image = strtolower(str_random(15)) . '.' . $ext;
+            rename($path . $imageName, $path . $new_image);
+            $category->url = $new_image;
+            $vws->updateTarget($category->target_id,
+                ['name' => str_replace(' ','_',$request->name),
+                'width' => 320,
+                'path' => file_get_contents(url('markers/' . $new_image)),
+                'metadata'=>$request->meta_data
+            ]);
 
-        Marker::destroy($id);
+        }
+        $category->save();
+        \Session::flash('updatecat', 'Markers  Updated Successfully  !');
+        return redirect('admin/markers?id='.$request->project_id);
+       }
+       public function destroy($id,VuforiaWebService $vws){
+        $category = Marker::findOrFail($id);
+        $vws->deleteTarget($category->target_id);
+        Marker::destroy($category->id);
         \Session::flash('delcat', 'Markers  Deleted Successfully  !');
         return redirect('admin/markers');
     }
-    public function activate(Request $request,$id){
-
-        $category = Marker::findOrFail($id);
-        $category->status = 1;
-        $category->save();
-        \Session::flash('activate', 'Markers  Activated Successfully  !');
-        return redirect('admin/markers');
-    }
-    public function deactivate(Request $request,$id){
-
-        $category = Marker::findOrFail($id);
-        $category->status = 0;
-        $category->save();
-        \Session::flash('deactivate', 'Markers  Deactivated Successfully  !');
-        return redirect('admin/markers');
-    }
-
     public function edit($id)
     {
 
@@ -102,37 +128,6 @@ class Markers extends Controller
         return view('admin.markers.edit',['project'=>$category]);
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $category = Marker::findOrFail($id);
-        $category->meta_data = $request->meta_data;
-        $category->project_id = $request->project_id;
-        $category->title = $request->name;
-        if($request->hasFile('image')) {
-            $path = public_path() . '/markers/';
-            $file = Input::file('image');
-            $imageName = $file->getClientOriginalName();
-            $file->move($path, $imageName);
-            $ext = Input::file('image')->getClientOriginalExtension();
-            $new_image = strtolower(str_random(15)) . '.' . $ext;
-            rename($path . $imageName, $path . $new_image);
-            $category->url = $new_image;
-        }
-        $category->vws_id = $request->name;
-        $category->save();
-        \Session::flash('updatecat', 'Markers  Updated Successfully  !');
-        return redirect('admin/markers?id='.$request->project_id);
-    }
-
-
 
 
 
