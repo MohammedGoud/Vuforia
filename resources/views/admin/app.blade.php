@@ -12,7 +12,8 @@
     <body>
     <div class="navbar navbar-inverse">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{url('/admin/home')}}"><img src="{{url('/')}}/assets_admin/assests/images/header-logo.png" alt=""></a>
+            <a class="navbar-brand" href="{{url('/admin/home')}}"><img src="{{url('/')}}/assets_admin/assests/images/logo_light.png" alt=""></a>
+
 
             <ul class="nav navbar-nav pull-right visible-xs-block">
                 <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -33,108 +34,16 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="icon-bubbles4"></i>
-                        <span class="visible-xs-inline-block position-right">Messages</span>
-                        <span class="badge bg-warning-400">2</span>
-                    </a>
-
-                    <div class="dropdown-menu dropdown-content width-350">
-                        <div class="dropdown-content-heading">
-                            Messages
-                            <ul class="icons-list">
-                                <li><a href="#"><i class="icon-compose"></i></a></li>
-                            </ul>
-                        </div>
-
-                        <ul class="media-list dropdown-content-body">
-                            <li class="media">
-                                <div class="media-left">
-                                    <img src="{{url('/')}}/assets_admin/assests/images/placeholder.jpg" class="img-circle img-sm" alt="">
-                                    <span class="badge bg-danger-400 media-badge">5</span>
-                                </div>
-
-                                <div class="media-body">
-                                    <a href="#" class="media-heading">
-                                        <span class="text-semibold">James Alexander</span>
-                                        <span class="media-annotation pull-right">04:58</span>
-                                    </a>
-
-                                    <span class="text-muted">who knows, maybe that would be the best thing for me...</span>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="media-left">
-                                    <img src="{{url('/')}}/assets_admin/assests/images/placeholder.jpg" class="img-circle img-sm" alt="">
-                                    <span class="badge bg-danger-400 media-badge">4</span>
-                                </div>
-
-                                <div class="media-body">
-                                    <a href="#" class="media-heading">
-                                        <span class="text-semibold">Margo Baker</span>
-                                        <span class="media-annotation pull-right">12:16</span>
-                                    </a>
-
-                                    <span class="text-muted">That was something he was unable to do because...</span>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="media-left"><img src="{{url('/')}}/assets_admin/assests/images/placeholder.jpg" class="img-circle img-sm" alt=""></div>
-                                <div class="media-body">
-                                    <a href="#" class="media-heading">
-                                        <span class="text-semibold">Jeremy Victorino</span>
-                                        <span class="media-annotation pull-right">22:48</span>
-                                    </a>
-
-                                    <span class="text-muted">But that would be extremely strained and suspicious...</span>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="media-left"><img src="{{url('/')}}/assets_admin/assests/images/placeholder.jpg" class="img-circle img-sm" alt=""></div>
-                                <div class="media-body">
-                                    <a href="#" class="media-heading">
-                                        <span class="text-semibold">Beatrix Diaz</span>
-                                        <span class="media-annotation pull-right">Tue</span>
-                                    </a>
-
-                                    <span class="text-muted">What a strenuous career it is that I've chosen...</span>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="media-left"><img src="{{url('/')}}/assets_admin/assests/images/placeholder.jpg" class="img-circle img-sm" alt=""></div>
-                                <div class="media-body">
-                                    <a href="#" class="media-heading">
-                                        <span class="text-semibold">Richard Vango</span>
-                                        <span class="media-annotation pull-right">Mon</span>
-                                    </a>
-
-                                    <span class="text-muted">Other travelling salesmen live a life of luxury...</span>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="dropdown-content-footer">
-                            <a href="#" data-popup="tooltip" title="" data-original-title="All messages"><i class="icon-menu display-block"></i></a>
-                        </div>
-                    </div>
-                </li>
 
                 <li class="dropdown dropdown-user">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{url('/')}}/assets_admin/assests/images/placeholder.jpg" alt="">
-                        <span>Victoria</span>
+                        <span>{{\Session::get('emailadmin')}}</span>
                         <i class="caret"></i>
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>
-                        <li><a href="#"><span class="badge badge-warning pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>
-                        <li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>
                         <li><a href="{{url('/admin/logout')}}"><i class="icon-switch2"></i> Logout</a></li>
                     </ul>
                 </li>
@@ -156,37 +65,23 @@
                             <ul class="navigation navigation-main navigation-accordion">
                                 <!-- Main -->
                                 <li ><a href="{{url('admin/home')}}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
-                                <li class=<?php echo ($controller=='categories')?"active" : ''; ?>>
+                                <li class=<?php echo ($controller=='projects')?"active" : ''; ?>>
                                     <a href="#"><i class="icon-grid"></i> <span>Projects</span></a>
                                     <ul>
                                         <li> <a href="{{url('admin/projects')}}"><i class="icon-list"></i>All Projects</a></li>
                                         <li><a href="{{url('admin/projects/create')}}"><i class="icon-add"></i> Add Project</a></li>
                                     </ul>
                                 </li>
-
-
-
-
-
-
-
-
-
+                                <li class=<?php echo ($controller=='markers')?"active" : ''; ?>>
+                                <a href="{{url('admin/markers')}}"><i class="icon-grid"></i> <span>All markers</span></a>
+                                </li>
 
                             </ul>
                         </div>
                     </div>
-                    <!-- /main navigation -->
-
                 </div>
             </div>
-            <!-- /main sidebar -->
-
-
-            <!-- Main content -->
             <div class="content-wrapper">
-
-                <!-- Page header -->
                 <div class="page-header">
                     <div class="page-header-content">
                         <div class="page-title">

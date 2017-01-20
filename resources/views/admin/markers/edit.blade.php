@@ -96,14 +96,25 @@
                             </div>
                         </div>
 
-
-
                         <div class="form-group">
-                            <label class="control-label col-lg-2">Meta_data :<span class="text-danger">*</span></label>
+                            <label class="control-label col-lg-2">Meta Data :<span class="text-danger">*</span></label>
                             <div class="col-lg-10">
-                                <input type="text" name="meta_data" class="form-control" required="required" value="{{isset($project->meta_data)?$project->meta_data:''}}">
+                                <?php $types=array('Villa','Apartment','Home');
+                                $select='';
+                                ?>
+                                <select class="form-control" name="meta_data">
+                                    @for($i=0;$i<count($types);$i++)
+                                        @if($project->meta_data==$types[$i])
+                                            <?php $select='selected="selected"';?>
+                                        @else
+                                            <?php  $select=''; ?>
+                                        @endif
+                                        <option value="{{$types[$i]}}"{{$select}}>{{$types[$i]}}</option>
+                                    @endfor
+                                </select>
                             </div>
                         </div>
+
 
 
 
