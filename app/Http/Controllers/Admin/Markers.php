@@ -67,7 +67,7 @@ class Markers extends Controller
             $category->url = $new_image;
             $tar=$vws->addTarget([
                 'name' => str_replace(' ','_',$request->name),
-                'width' => 320,
+                'width' => 10,
                 'path' => url('markers/' . $new_image),
                 'metadata'=>$request->meta_data
             ]);
@@ -99,7 +99,7 @@ class Markers extends Controller
             $category->url = $new_image;
             $vws->updateTarget($category->target_id,
                 ['name' => str_replace(' ','_',$request->name),
-                'width' => 320,
+                'width' => 10,
                 'path' => url('markers/' . $new_image),
                 'metadata'=>$request->meta_data
             ]);
