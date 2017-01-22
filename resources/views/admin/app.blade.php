@@ -76,6 +76,13 @@
                                 <a href="{{url('admin/markers')}}"><i class="icon-grid"></i> <span>All markers</span></a>
                                 </li>
 
+                                @if(\Session::get('adminrole')=='admin' )
+
+                                <li class=<?php echo ($controller=='users')?"active" : ''; ?>>
+                                    <a href="{{url('admin/users')}}"><i class="icon-grid"></i> <span>All Users</span></a>
+                                </li>
+                                @endif
+
                             </ul>
                         </div>
                     </div>

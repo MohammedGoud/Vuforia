@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 Route::resource('admin/projects', 'Admin\Projects');
 Route::resource('admin/markers', 'Admin\Markers');
+Route::resource('admin/users', 'Admin\Users');
 
 
 Route::get('admin/home', 'Admin\Home@index' );

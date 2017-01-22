@@ -27,6 +27,7 @@ class Login extends Controller
         if($cust!=null):
             $request->session()->put('emailadmin', $cust->email);
             $request->session()->put('adminid', $cust->id);
+            $request->session()->put('adminrole', $cust->role);
             return redirect('admin/home');
         else:
             return   view('admin.login');

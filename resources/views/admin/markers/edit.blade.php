@@ -83,7 +83,7 @@
             </div>
 
             <div class="panel-body">
-                    {!! Form::open(['method' => 'PATCH','url' => ['admin/markers/update', $project->id] ,'class'=>'form-horizontal form-validate-jquery' ,'enctype'=>"multipart/form-data" ]) !!}
+                    {!! Form::open(['method' => 'PATCH','route' => ['markers.update', $project->id] ,'class'=>'form-horizontal form-validate-jquery' ,'enctype'=>"multipart/form-data" ]) !!}
                 <input type="hidden" name="project_id" value="{{$project->project_id}}">
                     <fieldset class="content-group">
 

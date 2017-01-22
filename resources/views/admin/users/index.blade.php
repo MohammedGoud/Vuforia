@@ -35,8 +35,8 @@
 @stop
 @section('breadcrump')
     <ul class="breadcrumb">
-        <li><a href="{{url('/mzadqater_admin/')}}"><i class="icon-home2 position-left"></i> Home</a></li>
-        <li class="active"><a href="{{url('mzadqater_admin/users/')}}">Users</a></li>
+        <li><a href="{{url('/admin/')}}"><i class="icon-home2 position-left"></i> Home</a></li>
+        <li class="active"><a href="{{url('admin/users/')}}">Users</a></li>
 
     </ul>
     @stop
@@ -44,35 +44,56 @@
     <div class="content">
         @include('admin.message')
         <div class="panel panel-flat">
-
+            <div class="panel-heading">
+                <a href="{{url('admin/users/create')}}"> <h5 class="panel-title"><i class="icon-plus-circle2"></i> Add User</h5></a>
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                        <li><a data-action="reload"></a></li>
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>
+            </div>
 
 
             <table class="table datatable-basic table-bordered table-striped table-hover">
                 <thead>
                 <tr>
-                    <th>Username</th>
+                    <th>Name</th>
                     <th>Email</th>
-                    <th>Phone</th>
-                    <th>Code</th>
-                    <th hidden>Password</th>
-                    <th hidden>Status</th>
-                    <th hidden>Status</th>
+                    <th hidden></th>
+                    <th hidden></th>
+                    <th hidden></th>
+                    <th hidden></th>
+                    <th class="text-center">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($categories as $cat)
+                @foreach($users as $cat)
 
                 <tr>
-                    <td><a href="{{url('mzadqater_admin/users/edit/'.$cat->user_id)}}">{{$cat->user_name}}</a></td>
-                    <td><a href="{{url('mzadqater_admin/users/edit/'.$cat->user_id)}}">{{$cat->user_email}}</a></td>
-                    <td>{{$cat->user_phone}}</td>
-                    <td>{{$cat->user_registered_code}}</td>
-                    <td hidden>{{$cat->user_password}}</td>
+                    <td><a href="{{url('admin/users/'.$cat->id.'/edit')}}">{{$cat->name}}</a></td>
+                    <td><a href="{{url('admin/users/'.$cat->id.'/edit')}}">{{$cat->email}}</a></td>
+                    <td hidden></td>
+                    <td hidden></td>
                     <td hidden></td>
                     <td hidden></td>
 
+                    <td>
+                        <ul class="icons-list">
+                            <li class="text-danger-600">
+                                {!! Form::open(['method' => 'DELETE','url' => ['admin/users/destroy', $cat->id]  ]) !!}
+                                {!! Form::button('<i class="icon-trash"></i>', ['type' => 'submit']) !!}
+                                {!! Form::close() !!}</li>
+                            <li class="text-info-600"><a href="{{url('admin/users/'.$cat->id.'/edit')}}" data-popup="tooltip" data-original-title="Edit"><i class="icon-pencil7"></i></a></li>
+                            @if($cat->status==0)
+                            <li class="text-default-600"><a href="{{url('admin/users/activate/'.$cat->id)}}" data-popup="tooltip" data-original-title="Activate"><i class="icon-checkmark"></i></a></li>
+                             @else
+                              <li class="text-default-600"><a href="{{url('admin/users/deactivate/'.$cat->id)}}" data-popup="tooltip" data-original-title="Dactivate"><i class="icon-cancel-square"></i></a></li>
+                             @endif;
 
-
+                        </ul>
+                    </td>
                 </tr>
                     @endforeach
 

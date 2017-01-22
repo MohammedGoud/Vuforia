@@ -38,7 +38,7 @@ class Projects extends Controller
       public function store(Request $request)
     {
 
-        $category = new project;
+        $category = new Project;
         $category->title = $request->title;
         $category->breif = $request->breif;
          $category->save();
@@ -86,9 +86,7 @@ class Projects extends Controller
      */
     public function update(Request $request, $id)
     {
-        $path = public_path() . '/assets/images/categories/';
         $category = Project::findOrFail($id);
-
         $category->title = $request->title;
         $category->breif = $request->breif;
         $category->save();

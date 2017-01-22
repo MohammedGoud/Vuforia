@@ -1,9 +1,9 @@
 @extends('admin.app')
 @section('title')
-{{'Edit category'}}
+{{'Edit User'}}
 @stop
 @section('pagetitle')
-{{'Edit category'}}
+{{'Edit User'}}
 @stop
 @section('header')
 
@@ -62,9 +62,9 @@
 @stop
 @section('breadcrump')
     <ul class="breadcrumb">
-        <li><a href="{{url('/mzadqater_admin')}}"><i class="icon-home2 position-left"></i> Home</a></li>
-        <li><a href="{{url('mzadqater_admin/categories')}}">Categories</a></li>
-        <li class="active">Edit category</li>
+        <li><a href="{{url('/admin')}}"><i class="icon-home2 position-left"></i> Home</a></li>
+        <li><a href="{{url('admin/users')}}">Users</a></li>
+        <li class="active">Edit User</li>
     </ul>
     @stop
 @section('content')
@@ -83,140 +83,33 @@
             </div>
 
             <div class="panel-body">
-                    {!! Form::open(['method' => 'PATCH','route' => ['mzadqater_admin.categories.update', $details->category_id] ,'class'=>'form-horizontal form-validate-jquery' ,'enctype'=>"multipart/form-data" ]) !!}
+                    {!! Form::open(['method' => 'PATCH','route' => ['users.update', $user->id] ,'class'=>'form-horizontal form-validate-jquery' ,'enctype'=>"multipart/form-data" ]) !!}
 
                     <fieldset class="content-group">
                         <div class="form-group">
-                            <label class="control-label col-lg-2">Category name ar <span class="text-danger">*</span></label>
+                            <label class="control-label col-lg-2">Name <span class="text-danger">*</span></label>
                             <div class="col-lg-10">
-                                <input type="text" name="cat_ar" class="form-control" required="required" value="{{isset($details->category_names)?$details->category_names:''}}">
+                                <input type="text" name="name" class="form-control" required="required" value="{{isset($user->name)?$user->name:''}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">User name or Email <span class="text-danger">*</span></label>
+                            <div class="col-lg-10">
+                                <input type="text" name="email" class="form-control" required="required" value="{{isset($user->email)?$user->email:''}}">
                             </div>
                         </div>
 
 
                         <div class="form-group">
-                            <label class="control-label col-lg-2">Category name en <span class="text-danger">*</span></label>
+                            <label class="control-label col-lg-2">Password<span class="text-danger">*</span></label>
                             <div class="col-lg-10">
-                                <input type="text" name="cat_en" class="form-control" required="required" value="{{isset($details->category_name)?$details->category_name:''}}">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-lg-2">Category parent  <span class="text-danger">*</span></label>
-                            <div class="col-lg-10">
-                                <select name="parent" data-placeholder="Select a parent..." class="select" required="required">
-                                    <option value="0">Is a parent</option>
-                                     <?php  $select=''; ?>
-                                     @foreach($cats as $cat)
-
-
-                                     @if($details->category_parent==$cat->category_id)
-                                     <?php $select='selected="selected"';?>
-                                     @else
-                                     <?php  $select=''; ?>
-                                     @endif
-                                    <option value="{{$cat->category_id}}" {{$select}}>{{$cat->category_names .' '.$cat->category_name }}</option>
-                                    @endforeach
-
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-lg-2">Title seo <span class="text-danger">*</span></label>
-                            <div class="col-lg-10">
-                                <input type="text" name="seo" class="form-control" required="required" value="{{isset($details->tetle_web)?$details->tetle_web:''}}">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-lg-2">Keywords ar </label>
-                            <div class="col-lg-10">
-                                <textarea name="key_ar" class="form-control" >{{isset($details->keywordsar)?$details->keywordsar:''}}</textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-lg-2">Keywords en </label>
-                            <div class="col-lg-10">
-                                <textarea name="key_en" class="form-control" >{{isset($details->keywords)?$details->keywords:''}}</textarea>
+                                <input type="password" name="password" class="form-control" required="required" value="{{isset($user->password)?$user->password:''}}">
                             </div>
                         </div>
 
 
-                        <div class="form-group">
-                            <label class="control-label col-lg-2"> Description ar </label>
-                            <div class="col-lg-10">
-                           <textarea name="desc_ar"  rows="5" cols="5" class="form-control">{{isset($details->descriptionar)?$details->descriptionar:''}}
-								</textarea>  </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="control-label col-lg-2"> Description en </label>
-                            <div class="col-lg-10">
-                           <textarea name="desc_en" rows="5" cols="5" class="form-control" >{{isset($details->description)?$details->description:''}}
-								</textarea>  </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-lg-2">Category Icon <a href="http://fontawesome.io/icons/" target="_blank">use link</a> <span class="text-danger">*</span></label>
-                            <div class="col-lg-10">
-                                <input type="text" name="icon" class="form-control" required="required" value="{{isset($details->icon)?$details->icon:''}}">
-                            </div>
-                        </div>
-                        <?php $path = url('/assets/images/categories/'); ?>
-                        <div class="form-group hidden">
-                            <label class="col-lg-2 control-label">Category Image:</label>
-                            <div class="col-lg-10">
-                                <div class="file-preview" id="image_preview">
-                                    <div class="close fileinput-remove text-right">×</div>
-                                    <div class="file-preview-thumbnails">
-                                        <div class="file-preview-frame" >
-
-
-                                            <img src="{{isset($details->category_images)? $path.'/'.$details->category_images :''}}" class="file-preview-image" title="testimages.jpg" alt="testimages.jpg" style="width:auto;height:160px;">
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>   <div class="file-preview-status text-center text-success"></div>
-                                    <div class="kv-fileinput-error file-error-message" style="display: none;"></div>
-                                </div>
-                                <input type="file" class="file-input-custom" accept="image/*"  name="image">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">Category order</label>
-                            <div class="col-lg-2">
-                            <input type="text"  class="touchspin-basic input-sm" name="order" value="{{isset($details->category_order)?$details->category_order:''}}">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-lg-2">Types select</label>
-                            <div class="col-lg-10">
-                                <select multiple="multiple" class="form-control" name="types[]">
-                                     @foreach($types as $type)
-                                        @if(in_array($type->id,$cat_types))
-                                            <?php $select='selected="selected"';?>
-                                        @else
-                                            <?php  $select=''; ?>
-                                        @endif
-
-                                        <option value="{{$type->id}}" {{$select}}>{{$type->name_en .' '}} {{ ' '. $type->name_ar}} </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-lg-2"> Status <span class="text-danger">*</span></label>
-                            <div class="col-lg-10">
-                                <div class="checkbox checkbox-switchery switchery-xs">
-                                    <label>
-                                        <input type="checkbox" name="status" class="switchery"  {{($details->status==1)?'checked':''}} >
-                                        Published or not
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
 
                     </fieldset>
 

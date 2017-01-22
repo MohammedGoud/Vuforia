@@ -83,7 +83,13 @@
             </div>
 
             <div class="panel-body">
-                    {!! Form::open(['method' => 'PATCH','url' => ['admin/projects/update', $project->id] ,'class'=>'form-horizontal form-validate-jquery' ,'enctype'=>"multipart/form-data" ]) !!}
+
+                {{--{!! Form::model($project, [--}}
+    {{--'method' => 'PATCH',--}}
+    {{--'route' => ['tasks.update', $project->id]--}}
+{{--]) !!}--}}
+
+                    {!! Form::open(['method' => 'PATCH','route' => ['projects.update', $project->id] ,'class'=>'form-horizontal form-validate-jquery' ,'enctype'=>"multipart/form-data" ]) !!}
 
                     <fieldset class="content-group">
                         <div class="form-group">
