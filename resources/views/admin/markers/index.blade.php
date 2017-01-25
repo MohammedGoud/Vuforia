@@ -83,7 +83,7 @@
                     <td>
                         <ul class="icons-list">
                             <li class="text-danger-600">
-                                {!! Form::open(['method' => 'DELETE','url' => ['admin/markers/destroy', $cat->id]  ]) !!}
+                                {!! Form::open(['method' => 'DELETE','route' => ['markers.destroy', $cat->id]  ]) !!}
                                 {!! Form::button('<i class="icon-trash"></i>', ['type' => 'submit']) !!}
                                 {!! Form::close() !!}</li>
                             <li class="text-info-600"><a href="{{url('admin/markers/'.$cat->id.'/edit')}}" data-popup="tooltip" data-original-title="Edit"><i class="icon-pencil7"></i></a></li>
