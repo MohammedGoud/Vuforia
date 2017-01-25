@@ -87,11 +87,7 @@
                                 {!! Form::button('<i class="icon-trash"></i>', ['type' => 'submit']) !!}
                                 {!! Form::close() !!}</li>
                             <li class="text-info-600"><a href="{{url('admin/markers/'.$cat->id.'/edit')}}" data-popup="tooltip" data-original-title="Edit"><i class="icon-pencil7"></i></a></li>
-                            @if($cat->status==0)
-                            <li class="text-default-600"><a href="{{url('admin/markers/activate/'.$cat->id)}}" data-popup="tooltip" data-original-title="Activate"><i class="icon-checkmark"></i></a></li>
-                             @else
-                              <li class="text-default-600"><a href="{{url('admin/markers/deactivate/'.$cat->id)}}" data-popup="tooltip" data-original-title="Dactivate"><i class="icon-cancel-square"></i></a></li>
-                             @endif;
+
 
                         </ul>
                     </td>
@@ -103,11 +99,6 @@
             </table>
         </div>
 
-        <!-- Footer -->
-        <div class="footer text-muted">
-            &copy; 2015. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
-        </div>
-        <!-- /footer -->
     </div>
 
 

@@ -86,11 +86,7 @@
                                 {!! Form::button('<i class="icon-trash"></i>', ['type' => 'submit']) !!}
                                 {!! Form::close() !!}</li>
                             <li class="text-info-600"><a href="{{url('admin/users/'.$cat->id.'/edit')}}" data-popup="tooltip" data-original-title="Edit"><i class="icon-pencil7"></i></a></li>
-                            @if($cat->status==0)
-                            <li class="text-default-600"><a href="{{url('admin/users/activate/'.$cat->id)}}" data-popup="tooltip" data-original-title="Activate"><i class="icon-checkmark"></i></a></li>
-                             @else
-                              <li class="text-default-600"><a href="{{url('admin/users/deactivate/'.$cat->id)}}" data-popup="tooltip" data-original-title="Dactivate"><i class="icon-cancel-square"></i></a></li>
-                             @endif;
+
 
                         </ul>
                     </td>

@@ -102,7 +102,7 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label text-semibold">Marker :</label>
                             <div class="col-lg-10">
-                                <input type="file" class="file-input" accept="image" name="image" data-show-upload="yes">
+                                <input type="file" class="file-styled" accept="image" name="image" data-show-upload="no" required>
                             </div>
                         </div>
 
@@ -124,11 +124,7 @@
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class="footer text-muted">
-            &copy; 2015. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
-        </div>
-        <!-- /footer -->
+
     </div>
 
 

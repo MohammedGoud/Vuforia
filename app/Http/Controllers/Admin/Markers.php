@@ -30,12 +30,14 @@ class Markers extends Controller
 
         //print_r($tar['body']);
         //$vws->deleteTarget('a5a1f6891785413a8987bc345f52d87d');
-        if(isset($_GET['id'])) {
+        if(isset($_GET['id']) &&  $_GET['id']!=0) {
             $project_id=$_GET['id'];
             $categories = Marker::where('project_id','=',$project_id)->orderBy('id', 'ASC')->get();
-        }else{
+        }elseif( isset($_GET['id']) &&  $_GET['id']==0){
             $categories = Marker::orderBy('id', 'ASC')->get();
 
+        }else{
+            $categories = Marker::orderBy('id', 'ASC')->get();
         }
             return view('admin.markers.index',['categories'=>$categories]);
 

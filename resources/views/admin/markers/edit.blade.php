@@ -126,7 +126,7 @@
                                 <img src="<?php echo url('markers/'.$project->url)?>"width="300px" height="200px">
                                 <?php }?>
 
-                                <input type="file" class="file-input" accept="image/*" name="image" data-show-upload="false">
+                                <input type="file" class="file-styled" accept="image" name="image" data-show-upload="no" required>
                                 <span class="help-block">JPG - JIF - PNG </span>
                             </div>
                         </div>
