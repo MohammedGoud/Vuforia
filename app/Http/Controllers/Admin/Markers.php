@@ -58,6 +58,28 @@ class Markers extends Controller
         $category->meta_data = $request->meta_data;
         $category->project_id = $request->project_id;
         $category->title = $request->name;
+        $modeles=array();
+        if($request->hasFile('model')) {
+            $path = public_path() . '/models/'.$request->name.'/';
+            $files = Input::file('model');
+            foreach ($files as $file) {
+                $imageName = $file->getClientOriginalName();
+                $file->move($path, $imageName);
+                $ext = $file->getClientOriginalExtension();
+                $new_image = strtolower(str_random(15)) . '.' . $ext;
+                $modeles[]=$path.$new_image;
+                rename($path . $imageName, $path . $new_image);
+            }
+
+
+        }
+
+        $new_meta=json_encode($modeles);
+        if($new_meta!=null){
+            $medta=$new_meta;
+        }else{
+            $medta=$request->meta_data;
+        }
         if($request->hasFile('image')) {
             $path = public_path() . '/markers/';
             $file = Input::file('image');
@@ -71,14 +93,20 @@ class Markers extends Controller
                 'name' => str_replace(' ','_',$request->name),
                 'width' => 150,
                 'path' => url('markers/' . $new_image),
-                'metadata'=>$request->meta_data
+                'metadata'=>$medta
             ]);
 
             $atgg=json_decode($tar['body']);
             $category->target_id = $atgg->target_id;
 
 
+
         }
+
+
+
+
+
         $category->save();
         \Session::flash('addcat', 'Markers  Add Successfully  !');
         return redirect('admin/markers?id='.$request->project_id);
@@ -90,6 +118,31 @@ class Markers extends Controller
         $category->meta_data = $request->meta_data;
         $category->project_id = $request->project_id;
         $category->title = $request->name;
+
+
+
+        $modeles=array();
+        if($request->hasFile('model')) {
+            $path = public_path() . '/models/'.$request->name.'/';
+            $files = Input::file('model');
+            foreach ($files as $file) {
+                $imageName = $file->getClientOriginalName();
+                $file->move($path, $imageName);
+                $ext = $file->getClientOriginalExtension();
+                $new_image = strtolower(str_random(15)) . '.' . $ext;
+                $modeles[]=$path.$new_image;
+                rename($path . $imageName, $path . $new_image);
+            }
+
+
+        }
+
+        $new_meta=json_encode($modeles);
+        if($new_meta!=null){
+            $medta=$new_meta;
+        }else{
+            $medta=$request->meta_data;
+        }
         if($request->hasFile('image')) {
             $path = public_path() . '/markers/';
             $file = Input::file('image');
@@ -103,10 +156,12 @@ class Markers extends Controller
                 ['name' => str_replace(' ','_',$request->name),
                 'width' => 150,
                 'path' => url('markers/' . $new_image),
-                'metadata'=>$request->meta_data
+                'metadata'=>$medta
             ]);
 
         }
+
+
         $category->save();
         \Session::flash('updatecat', 'Markers  Updated Successfully  !');
         return redirect('admin/markers?id='.$request->project_id);

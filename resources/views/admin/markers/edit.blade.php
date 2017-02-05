@@ -131,7 +131,30 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label text-semibold">3D Models</label>
+                            <div class="col-lg-10">
+                                <div class="form-group form-group-lg">
+                                    <input type="file" class="file-input" data-show-caption="false" data-show-upload="false" name="model[]" data-browse-class="btn btn-primary btn-lg btn-icon" data-remove-class="btn btn-danger btn-lg btn-icon">
+                                    <span class="help-inline ml-10">Add</span>
+                                </div>
 
+                                <div class="form-group">
+                                    <input type="file" class="file-input" data-show-caption="false" data-show-upload="false" name="model[]">
+                                    <span class="help-inline ml-10">Add</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="file" class="file-input" data-show-caption="false" data-show-upload="false" name="model[]" data-browse-class="btn btn-primary btn-sm btn-icon" data-remove-class="btn btn-danger btn-sm btn-icon">
+                                    <span class="help-inline ml-10">Add</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="file" class="file-input" data-show-caption="false" data-show-upload="false" name="model[]" data-browse-class="btn btn-primary btn-xs btn-icon" data-remove-class="btn btn-danger btn-xs btn-icon">
+                                    <span class="help-inline ml-10">Add</span>
+                                </div>
+                            </div>
+                        </div>
 
                     </fieldset>
 
