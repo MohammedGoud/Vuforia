@@ -62,6 +62,7 @@ class Markers extends Controller
         if($request->hasFile('model')) {
             $path = public_path() . '/models/'.$request->name.'/';
             $files = Input::file('model');
+
             foreach ($files as $file) {
                 $imageName = $file->getClientOriginalName();
                 $file->move($path, $imageName);
