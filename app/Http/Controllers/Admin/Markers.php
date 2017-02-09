@@ -51,7 +51,7 @@ class Markers extends Controller
         //
     }
 
-      public function store(Request $request,VuforiaWebService $vws)
+    public function store(Request $request,VuforiaWebService $vws)
     {
 
         $category = new Marker;
@@ -62,7 +62,6 @@ class Markers extends Controller
         if($request->hasFile('model')) {
             $path = public_path() . '/models/'.str_replace(' ','_',$request->name).'/';
             $files = Input::file('model');
-
             foreach ($files as $file) {
                 $imageName = $file->getClientOriginalName();
                 $file->move($path, $imageName);
