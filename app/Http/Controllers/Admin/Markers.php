@@ -60,7 +60,7 @@ class Markers extends Controller
         $category->title = $request->name;
         $modeles=array();
         if($request->hasFile('model')) {
-            $path = public_path() . '/models/'.$request->name.'/';
+            $path = public_path() . '/models/'.str_replace(' ','_',$request->name).'/';
             $files = Input::file('model');
 
             foreach ($files as $file) {
@@ -124,7 +124,7 @@ class Markers extends Controller
 
         $modeles=array();
         if($request->hasFile('model')) {
-            $path = public_path() . '/models/'.$request->name.'/';
+            $path = public_path() . '/models/'.str_replace(' ','_',$request->name).'/';
             $files = Input::file('model');
             foreach ($files as $file) {
                 $imageName = $file->getClientOriginalName();
