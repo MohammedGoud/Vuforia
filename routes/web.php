@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('admin/projects', 'Admin\Projects');
-Route::resource('admin/targets', 'Admin\s');
+Route::resource('admin/targets', 'Admin\Targets');
 Route::resource('admin/markers', 'Admin\Markers');
 Route::resource('admin/users', 'Admin\Users');
 
