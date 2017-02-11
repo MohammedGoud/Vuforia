@@ -20,10 +20,10 @@ class Targets extends Controller
     public function index(VuforiaWebService $vws)
     {
 
-
+       $id=$_GET['id'];
         echo "<pre>";
-        var_dump($vws->getTargets());
-        echo "</pre>";
+        print_r($vws->getTarget('3862212494bc4c1bbe9152c2bbb59952'));
+        echo "<pre>";
 
 
     }

@@ -75,11 +75,12 @@ class Markers extends Controller
         }
 
         $new_meta=json_encode($modeles);
-        if($new_meta!=null){
+        if(!empty($modeles)){
             $medta=$new_meta;
         }else{
             $medta=$request->meta_data;
         }
+
         if($request->hasFile('image')) {
             $path = public_path() . '/markers/';
             $file = Input::file('image');
@@ -137,8 +138,8 @@ class Markers extends Controller
 
         }
 
-        $new_meta=json_encode($modeles);
-        if($new_meta!=null){
+        $new_meta=json_encode();
+        if(!empty($modeles)){
             $medta=$new_meta;
         }else{
             $medta=$request->meta_data;
