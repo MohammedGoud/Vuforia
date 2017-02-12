@@ -61,22 +61,25 @@ class Markers extends Controller
         $modeles=array();
         if($request->hasFile('model')) {
             $path = public_path() . '/models/'.str_replace(' ','_',$request->name).'/';
+            $path2 = url('/models/'.str_replace(' ','_',$request->name).'/');
+
             $files = Input::file('model');
             foreach ($files as $file) {
                 $imageName = $file->getClientOriginalName();
                 $file->move($path, $imageName);
                 $ext = $file->getClientOriginalExtension();
                 $new_image = strtolower(str_random(15)) . '.' . $ext;
-                $modeles[]=$path.$new_image;
+                $modeles[]=array('url'=>url('/models/'.str_replace(' ','_',$request->name).'/'.$new_image));
                 rename($path . $imageName, $path . $new_image);
             }
 
 
         }
 
-        $new_meta=json_encode($modeles);
+        $data=array('data'=>$modeles);
+        $new_meta=json_encode($data);
         if(!empty($modeles)){
-            $medta=$new_meta;
+            $medta=stripslashes($new_meta);
         }else{
             $medta=$request->meta_data;
         }
@@ -131,16 +134,16 @@ class Markers extends Controller
                 $file->move($path, $imageName);
                 $ext = $file->getClientOriginalExtension();
                 $new_image = strtolower(str_random(15)) . '.' . $ext;
-                $modeles[]=$path.$new_image;
+                $modeles[]=array('url'=>url('/models/'.str_replace(' ','_',$request->name).'/'.$new_image));
                 rename($path . $imageName, $path . $new_image);
             }
 
 
         }
-
-        $new_meta=json_encode();
+        $data=array('data'=>$modeles);
+        $new_meta=json_encode($data);
         if(!empty($modeles)){
-            $medta=$new_meta;
+            $medta=stripslashes($new_meta);
         }else{
             $medta=$request->meta_data;
         }
