@@ -69,8 +69,10 @@ class Markers extends Controller
                 $file->move($path, $imageName);
                 $ext = $file->getClientOriginalExtension();
                 $new_image = strtolower(str_random(15)) . '.' . $ext;
-                $modeles[]=array('url'=>url('/models/'.str_replace(' ','_',$request->name).'/'.$new_image));
-                rename($path . $imageName, $path . $new_image);
+                //dd($imageName);
+
+                $modeles[]=array('url'=>url('/models/'.str_replace(' ','_',$request->name).'/'.$imageName));
+                //rename($path . $imageName, $path . $new_image);
             }
 
 
@@ -134,8 +136,8 @@ class Markers extends Controller
                 $file->move($path, $imageName);
                 $ext = $file->getClientOriginalExtension();
                 $new_image = strtolower(str_random(15)) . '.' . $ext;
-                $modeles[]=array('url'=>url('/models/'.str_replace(' ','_',$request->name).'/'.$new_image));
-                rename($path . $imageName, $path . $new_image);
+                $modeles[]=array('url'=>url('/models/'.str_replace(' ','_',$request->name).'/'.$imageName));
+                //rename($path . $imageName, $path . $new_image);
             }
 
 
@@ -147,6 +149,8 @@ class Markers extends Controller
         }else{
             $medta=$request->meta_data;
         }
+
+
         if($request->hasFile('image')) {
             $path = public_path() . '/markers/';
             $file = Input::file('image');
