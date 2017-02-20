@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Marker;
+use App\Models;
+
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
@@ -55,35 +57,58 @@ class Markers extends Controller
     {
 
         $category = new Marker;
-        $category->meta_data = $request->meta_data;
+
         $category->project_id = $request->project_id;
+        $category->lat = $request->lat;
+        $category->lng = $request->long;
         $category->title = $request->name;
         $modeles=array();
+        $modeles[]=array('lat'=>$request->lat,'long'=>$request->long);
+
         if($request->hasFile('model')) {
             $path = public_path() . '/models/'.str_replace(' ','_',$request->name).'/';
-            $path2 = url('/models/'.str_replace(' ','_',$request->name).'/');
-
             $files = Input::file('model');
             foreach ($files as $file) {
                 $imageName = $file->getClientOriginalName();
                 $file->move($path, $imageName);
-                $ext = $file->getClientOriginalExtension();
-                $new_image = strtolower(str_random(15)) . '.' . $ext;
-                //dd($imageName);
-
                 $modeles[]=array('url'=>url('/models/'.str_replace(' ','_',$request->name).'/'.$imageName));
-                //rename($path . $imageName, $path . $new_image);
+
             }
 
 
         }
 
+        if($request->hasFile('image360')) {
+            $path = public_path() . '/360/';
+            $file = Input::file('image360');
+            $imageName = $file->getClientOriginalName();
+            $file->move($path, $imageName);
+            $ext = Input::file('image360')->getClientOriginalExtension();
+            $new_image = strtolower(str_random(15)) . '.' . $ext;
+            rename($path . $imageName, $path . $new_image);
+            $category->image360 = $new_image;
+            $modeles[]=array('image360'=>url('/360/'.$new_image));
+        }
+        if($request->hasFile('video360')) {
+            $path = public_path() . '/360/';
+            $file = Input::file('video360');
+            $imageName = $file->getClientOriginalName();
+            $file->move($path, $imageName);
+            $ext = Input::file('video360')->getClientOriginalExtension();
+            $new_image = strtolower(str_random(15)) . '.' . $ext;
+            rename($path . $imageName, $path . $new_image);
+            $category->video360 = $new_image;
+            $modeles[]=array('video360'=>url('/360/'.$new_image));
+        }
         $data=array('data'=>$modeles);
         $new_meta=json_encode($data);
+        dd(stripslashes($new_meta));
         if(!empty($modeles)){
             $medta=stripslashes($new_meta);
+            $category->meta_data = $data;
         }else{
             $medta=$request->meta_data;
+            $category->meta_data = $request->meta_data;
         }
 
         if($request->hasFile('image')) {
@@ -121,7 +146,6 @@ class Markers extends Controller
       public function update(Request $request, $id,VuforiaWebService $vws)
     {
         $category = Marker::findOrFail($id);
-        $category->meta_data = $request->meta_data;
         $category->project_id = $request->project_id;
         $category->title = $request->name;
 
@@ -146,8 +170,11 @@ class Markers extends Controller
         $new_meta=json_encode($data);
         if(!empty($modeles)){
             $medta=stripslashes($new_meta);
+            $category->meta_data = $data;
         }else{
             $medta=$request->meta_data;
+            $category->meta_data = $request->meta_data;
+
         }
 
 
