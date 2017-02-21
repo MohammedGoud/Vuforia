@@ -21,6 +21,8 @@ Route::resource('admin/users', 'Admin\Users');
 
 
 Route::get('admin/home', 'Admin\Home@index' );
+
+Route::get('admin/del_model', 'Admin\Markers@del_model' );
 Route::get('admin/home', 'Admin\Home@index' );
 Route::get('admin/login', 'Admin\Login@index' );
 Route::post('admin/validenter', 'Admin\Login@validenter' );

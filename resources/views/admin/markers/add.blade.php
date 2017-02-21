@@ -147,11 +147,8 @@
                                     <input type="file" class="file-input" data-show-caption="false" data-show-upload="false" name="model[]" multiple data-browse-class="btn btn-primary btn-lg btn-icon" data-remove-class="btn btn-danger btn-lg btn-icon">
                                     <span class="help-inline ml-10">Browse Your 3D Files</span>
                                 </div>
-
                         </div>
                         </div>
-
-
                         <div class="form-group">
                             <label class="col-lg-2 control-label text-semibold">360 Image</label>
                             <div class="col-lg-10">
@@ -176,21 +173,21 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label text-semibold">GPS Locations</label>
                             <div class="col-lg-10">
-                        <input id="searchInput" class="controls" type="text" placeholder="Enter a location">
+                        <input id="searchInput" class="controls" type="text" placeholder="Enter a location" name="address">
                         <div id="map" ></div>
                             </div>
                         </div>
                         <div class="form-group" hidden>
                             <label class="control-label col-lg-2">Lat :<span class="text-danger">*</span></label>
                             <div class="col-lg-10">
-                                <input type="text" name="lat" class="form-control" required="required" id="lat" value="">
+                                <input type="text" name="lat" class="form-control"  id="lat" value="">
                             </div>
                         </div>
                         <div class="form-group" hidden>
 
                             <label class="control-label col-lg-2">Long :<span class="text-danger">*</span></label>
                             <div class="col-lg-10">
-                                <input type="text" name="long" class="form-control" required="required" id="lon" value="">
+                                <input type="text" name="long" class="form-control"  id="lon" value="">
                             </div>
                         </div>
 
@@ -217,7 +214,7 @@
     <script>
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 30.0566104, lng:  31.33010760000002},
+                center: {lat: 30.0444196, lng:  31.23571160000006},
                 zoom: 13
             });
             var input = document.getElementById('searchInput');
