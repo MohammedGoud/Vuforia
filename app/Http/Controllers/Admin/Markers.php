@@ -232,6 +232,7 @@ class Markers extends Controller
         if(isset($category->video360)){
             unlink(url('/360/'.$category->video360));
         }
+        dd($models);
         if(!empty($models)){
            foreach($models as $model){
                unlink(url('models/'.str_replace(' ','_',$category->title).'/'.$model->url));
