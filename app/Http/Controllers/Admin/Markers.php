@@ -223,19 +223,23 @@ class Markers extends Controller
        }
     public function destroy($id,VuforiaWebService $vws){
         $category = Marker::findOrFail($id);
-        $models = Models::findOrFail($category->id);
+        $models = Models::where('marker_id',$category->id)->first();
         $vws->deleteTarget($category->target_id);
-        unlink(url('/markers/'.$category->url));
-        if(isset($category->image360)){
-            unlink(url('/360/'.$category->image360));
+
+        if($category->url!=null){
+
+            unlink(public_path('/markers/'.$category->url));
         }
-        if(isset($category->video360)){
-            unlink(url('/360/'.$category->video360));
+        if($category->image360!=null){
+            unlink(public_path('/360/'.$category->image360));
         }
-        dd($models);
-        if(!empty($models)){
+        if($category->video360!=null){
+            unlink(public_path('/360/'.$category->video360));
+        }
+
+        if(!empty($models) && $models!=null){
            foreach($models as $model){
-               unlink(url('models/'.str_replace(' ','_',$category->title).'/'.$model->url));
+               unlink(public_path('models/'.str_replace(' ','_',$category->title).'/'.$model->url));
                Models::destroy($model->id);
            }
         }
@@ -247,7 +251,7 @@ class Markers extends Controller
         $id=$_GET['id'];
         $model = Models::findOrFail($id);
         $marker = Marker::findOrFail($id);
-        unlink(url('models/'.str_replace(' ','_',$marker->title).'/'.$model->url));
+        public_path(url('models/'.str_replace(' ','_',$marker->title).'/'.$model->url));
         Models::destroy($id);
 
         \Session::flash('delcat', 'Markers  Deleted Successfully  !');
