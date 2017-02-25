@@ -224,7 +224,7 @@ class Markers extends Controller
     public function destroy($id,VuforiaWebService $vws){
         $category = Marker::findOrFail($id);
         $models = Models::where('marker_id',$category->id)->first();
-        $vws->deleteTarget($category->target_id);
+        $vws->deleteTarget($category->vws_id);
 
         if($category->url!=null){
 
