@@ -21,13 +21,12 @@ class Markers extends Controller
     }
     public function index(VuforiaWebService $vws)
     {
-        if(isset($_GET['id']) &&  $_GET['id']!=0) {
-            $project_id=$_GET['id'];
-            $categories = Marker::where('project_id','=',$project_id)->orderBy('id', 'ASC')->get();
-        }elseif( isset($_GET['id']) &&  $_GET['id']==0){
-            $categories = Marker::orderBy('id', 'ASC')->get();
-
-        }else{
+        $user=\Session::get('adminid');
+        $role=\Session::get('adminrole');
+        if($role!='admin') {
+            $categories = Marker::where('user_id', '=', $user)->orderBy('id', 'ASC')->get();
+        }
+        else{
             $categories = Marker::orderBy('id', 'ASC')->get();
         }
             return view('admin.markers.index',['categories'=>$categories]);
@@ -37,8 +36,8 @@ class Markers extends Controller
     public function create()
     {
 
-        $project_id=$_GET['id'];
-        return view('admin.markers.add',['project_id'=>$project_id]);
+
+        return view('admin.markers.add');
         //
     }
     public function edit($id)
@@ -53,7 +52,8 @@ class Markers extends Controller
     {
 
         $category = new Marker;
-        $category->project_id = $request->project_id;
+        $user=\Session::get('adminid');
+        $category->user_id = $user;
         $category->lat = $request->lat;
         $category->lng = $request->long;
         $category->title = $request->name;
@@ -99,11 +99,10 @@ class Markers extends Controller
         $new_meta=json_encode($data);
         if(!empty($modeles)){
             $medta=stripslashes($new_meta);
-            $category->meta_data = $medta;
         }else{
             $medta=$request->meta_data;
-            $category->meta_data = $request->meta_data;
         }
+        $category->meta_data = $request->meta_data;
         if($request->hasFile('image')) {
             $path = public_path() . '/markers/';
             $file = Input::file('image');
@@ -133,12 +132,13 @@ class Markers extends Controller
             }
         }
         \Session::flash('addcat', 'Markers  Add Successfully  !');
-        return redirect('admin/markers?id='.$request->project_id);
+        return redirect('admin/markers');
     }
     public function update(Request $request, $id,VuforiaWebService $vws)
     {
         $category = Marker::findOrFail($id);
-        $category->project_id = $request->project_id;
+        $user=\Session::get('adminid');
+        $category->user_id = $user;
         $category->lat = $request->lat;
         $category->lng = $request->long;
         $category->title = $request->name;
@@ -185,11 +185,12 @@ class Markers extends Controller
         $new_meta=json_encode($data);
         if(!empty($modeles)){
             $medta=stripslashes($new_meta);
-            $category->meta_data = $medta;
+
         }else{
             $medta=$request->meta_data;
-            $category->meta_data = $request->meta_data;
+
         }
+        $category->meta_data = $request->meta_data;
 
         if($request->hasFile('image')) {
             $path = public_path() . '/markers/';
@@ -219,7 +220,7 @@ class Markers extends Controller
             }
         }
         \Session::flash('addcat', 'Markers  Add Successfully  !');
-        return redirect('admin/markers?id='.$request->project_id);
+        return redirect('admin/markers');
        }
     public function destroy($id,VuforiaWebService $vws){
         $category = Marker::findOrFail($id);

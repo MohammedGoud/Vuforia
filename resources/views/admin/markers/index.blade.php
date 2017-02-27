@@ -61,9 +61,10 @@
                 <thead>
                 <tr>
                     <th >Name</th>
-                    <th>Marker </th>
-                    <th>Meta Data</th>
-                    <th hidden></th>
+                    <th>Marker Image </th>
+                    <th>Type</th>
+                    <th>Creation Date</th>
+                    <th>Updated Date</th>
                     <th hidden></th>
                     <th hidden></th>
                     <th class="text-center">Actions</th>
@@ -77,7 +78,8 @@
                     <td>{{$cat->title}}</td>
                     <td><img src="{{url('markers/'.$cat->url)}}" style="width:90px;"></td>
                     <td >{{$cat->meta_data}}</td>
-                    <td hidden></td>
+                    <td >{{$cat->creation_date}}</td>
+                    <td >{{$cat->update_date}}</td>
                     <td hidden></td>
                     <td hidden></td>
                     <td>

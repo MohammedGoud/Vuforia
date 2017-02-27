@@ -82,6 +82,7 @@
     <!-- /theme JS files -->
     <script type="text/javascript" src="{{url('')}}/assets_admin/assests/js/custom/category.js"></script>
 
+    <script type="text/javascript" src="{{url('')}}/assets_admin/assests/js/category.js"></script>
 
 
 
@@ -112,7 +113,6 @@
             <div class="panel-body">
                 {!! Form::open(['method' => 'PATCH','route' => ['markers.update', $marker->id] ,'class'=>'form-horizontal form-validate-jquery' ,'enctype'=>"multipart/form-data" ]) !!}
                     {{csrf_field()}}
-                    <input type="hidden" name="project_id" value="2">
                     <fieldset class="content-group">
 
                         <div class="form-group">
@@ -125,7 +125,7 @@
                         <div class="form-group">
                             <label class="control-label col-lg-2">Meta Data :<span class="text-danger">*</span></label>
                             <div class="col-lg-10">
-                                <?php $types=array('Villa','Apartment','Home');?>
+                                <?php $types=array('Villa','Apartment','Home','3D Model');?>
                                 <select class="form-control" name="meta_data">
                                     @for($i=0;$i<count($types);$i++)
                                         <option value="{{$types[$i]}}">{{$types[$i]}}</option>
@@ -145,7 +145,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" id="3d_div" style="display: none">
                             <label class="col-lg-2 control-label text-semibold">3D Models</label>
                             <div class="col-lg-10">
                                 <div class="form-group form-group-lg">
@@ -166,8 +166,25 @@
 
                         </div>
 
-
                         <div class="form-group">
+                            <label class="col-lg-2 display-block text-semibold">Marker Options</label>
+                            <div class="col-lg-10">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="styled" id="360image">
+                                    360 Image
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="styled" id="360video">
+                                    360 Video
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="styled" id="gps">
+                                    GPS Location
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="form-group" id="360image_div" style="display: none">
                             <label class="col-lg-2 control-label text-semibold">360 Image</label>
                             <div class="col-lg-10">
                                 <div class="form-group form-group-lg">
@@ -185,7 +202,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" id="360video_div" style="display: none">
                             <label class="col-lg-2 control-label text-semibold">360 Video</label>
                             <div class="col-lg-10">
                                 <div class="form-group form-group-lg">
@@ -205,7 +222,7 @@
 
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="gps_div" style="display: none">
                             <label class="col-lg-2 control-label text-semibold">GPS Locations</label>
                             <div class="col-lg-10">
                                 <input id="searchInput" class="controls" type="text" placeholder="Enter a location" name="address" value="{{$marker->address}}">

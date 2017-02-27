@@ -80,7 +80,7 @@
 <script type="text/javascript" src="{{url('')}}/assets_admin/assests/js/plugins/uploaders/fileinput.min.js"></script>
 <script type="text/javascript" src="{{url('')}}/assets_admin/assests/js/pages/uploader_bootstrap.js"></script>
 <!-- /theme JS files -->
-<script type="text/javascript" src="{{url('')}}/assets_admin/assests/js/custom/category.js"></script>
+<script type="text/javascript" src="{{url('')}}/assets_admin/assests/js/category.js"></script>
 
 
 
@@ -90,7 +90,7 @@
 @section('breadcrump')
     <ul class="breadcrumb">
         <li><a href="{{url('/admin')}}"><i class="icon-home2 position-left"></i> Home</a></li>
-        <li><a href="{{url('admin/markers?id='.$_GET['id'])}}">Markers</a></li>
+        <li><a href="{{url('admin/markers')}}">Markers</a></li>
         <li class="active">Add Marker</li>
     </ul>
     @stop
@@ -112,21 +112,20 @@
             <div class="panel-body">
                 <form class="form-horizontal form-validate-jquery" action="{{url('admin/markers/')}}" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
-                    <input type="hidden" name="project_id" value="{{$project_id}}">
                     <fieldset class="content-group">
-
                         <div class="form-group">
-                            <label class="control-label col-lg-2">Name :<span class="text-danger">*</span></label>
+                            <label class="col-lg-2 control-label text-semibold">Name :<span class="text-danger">*</span></label>
                             <div class="col-lg-10">
                                 <input type="text" name="name" class="form-control" required="required">
                             </div>
                         </div>
-
                         <div class="form-group">
-                            <label class="control-label col-lg-2">Meta Data :<span class="text-danger">*</span></label>
+                            <label class="col-lg-2 control-label text-semibold">Marker Type :<span class="text-danger">*</span></label>
                             <div class="col-lg-10">
-                                <?php $types=array('Villa','Apartment','Home');?>
-                                <select class="form-control" name="meta_data">
+                                <?php $types=array('Villa','Apartment','Home','3D Model');?>
+
+                                <select class="form-control" name="meta_data" id="meta" required>
+                                    <option value="">Selet Marker Type</option>
                                     @for($i=0;$i<count($types);$i++)
                                         <option value="{{$types[$i]}}">{{$types[$i]}}</option>
                                     @endfor
@@ -134,13 +133,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label text-semibold">Marker :</label>
+                            <label class="col-lg-2 control-label text-semibold">Marker Image :<span class="text-danger">*</span></label>
                             <div class="col-lg-10">
                                 <input type="file" class="file-styled" accept="image" name="image" data-show-upload="no" required>
                             </div>
                         </div>
 
-                        <div class="form-group">
+
+
+                        <div class="form-group" id="3d_div" style="display: none">
                             <label class="col-lg-2 control-label text-semibold">3D Models</label>
                             <div class="col-lg-10">
                                 <div class="form-group form-group-lg">
@@ -149,7 +150,27 @@
                                 </div>
                         </div>
                         </div>
+
                         <div class="form-group">
+                            <label class="col-lg-2 display-block text-semibold">Marker Options</label>
+                            <div class="col-lg-10">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="styled" id="360image">
+                                    360 Image
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="styled" id="360video">
+                                    360 Video
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="styled" id="gps">
+                                    GPS Location
+                                </label>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="360image_div" style="display: none">
                             <label class="col-lg-2 control-label text-semibold">360 Image</label>
                             <div class="col-lg-10">
                                 <div class="form-group form-group-lg">
@@ -160,7 +181,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" id="360video_div" style="display: none">
                             <label class="col-lg-2 control-label text-semibold">360 Video</label>
                             <div class="col-lg-10">
                                 <div class="form-group form-group-lg">
@@ -170,7 +191,7 @@
 
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="gps_div" style="display: none">
                             <label class="col-lg-2 control-label text-semibold">GPS Locations</label>
                             <div class="col-lg-10">
                         <input id="searchInput" class="controls" type="text" placeholder="Enter a location" name="address">

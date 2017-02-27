@@ -64,22 +64,24 @@
                         <div class="category-content no-padding">
                             <ul class="navigation navigation-main navigation-accordion">
                                 <!-- Main -->
-                                <li ><a href="{{url('admin/home')}}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
-                                <li class=<?php echo ($controller=='projects')?"active" : ''; ?>>
-                                    <a href="#"><i class="icon-grid"></i> <span>Projects</span></a>
+                                <li ><a href="{{url('admin/home')}}"><i class="icon-stats-bars"></i> <span>Statiscs</span></a></li>
+                                <li class=<?php echo ($controller=='markers')?"active" : ''; ?>>
+                                    <a href="#"><i class="icon-images3"></i> <span>All Markers</span></a>
                                     <ul>
-                                        <li> <a href="{{url('admin/projects')}}"><i class="icon-list"></i>All Projects</a></li>
-                                        <li><a href="{{url('admin/projects/create')}}"><i class="icon-add"></i> Add Project</a></li>
+                                        <li> <a href="{{url('admin/markers')}}"><i class="icon-images2"></i>Markers</a></li>
+                                        <li><a href="{{url('admin/markers/create')}}"><i class="icon-add"></i> Add marker</a></li>
                                     </ul>
                                 </li>
-                                <li class=<?php echo ($controller=='markers')?"active" : ''; ?>>
-                                <a href="{{url('admin/markers')}}"><i class="icon-grid"></i> <span>All markers</span></a>
-                                </li>
+
 
                                 @if(\Session::get('adminrole')=='admin' )
+                                    <li class=<?php echo ($controller=='log')?"active" : ''; ?>>
+                                        <a href="{{url('admin/log')}}"><i class="icon-copy"></i> <span>Log File</span></a>
+
+                                    </li>
 
                                 <li class=<?php echo ($controller=='users')?"active" : ''; ?>>
-                                    <a href="{{url('admin/users')}}"><i class="icon-grid"></i> <span>All Users</span></a>
+                                    <a href="{{url('admin/users')}}"><i class="icon-user-plus"></i> <span>All Users</span></a>
                                 </li>
                                 @endif
 
