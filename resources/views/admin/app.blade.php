@@ -75,8 +75,8 @@
 
 
                                 @if(\Session::get('adminrole')=='admin' )
-                                    <li class=<?php echo ($controller=='log')?"active" : ''; ?>>
-                                        <a href="{{url('admin/log')}}"><i class="icon-copy"></i> <span>Log File</span></a>
+                                    <li class=<?php echo ($controller=='logs')?"active" : ''; ?>>
+                                        <a href="{{url('admin/logs')}}"><i class="icon-copy"></i> <span>Log File</span></a>
 
                                     </li>
 

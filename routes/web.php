@@ -18,6 +18,7 @@ Route::resource('admin/projects', 'Admin\Projects');
 Route::resource('admin/targets', 'Admin\Targets');
 Route::resource('admin/markers', 'Admin\Markers');
 Route::resource('admin/users', 'Admin\Users');
+Route::resource('admin/logs', 'Admin\Logs');
 
 
 Route::get('admin/home', 'Admin\Home@index' );

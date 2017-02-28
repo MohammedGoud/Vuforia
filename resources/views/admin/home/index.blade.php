@@ -31,12 +31,180 @@
 
 <script type="text/javascript" src="{{url('')}}/assets_admin/assests/js/core/app.js"></script>
 <script type="text/javascript" src="{{url('')}}/assets_admin/assests/js/pages/dashboard.js"></script>
+
+<!-- Theme JS files -->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<style>
+    h3{
+        text-align: center;
+    }
+</style>
+<script type="text/javascript">
+
+    // Initialize chart
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawLineChart);
+    google.setOnLoadCallback(drawLineChart2);
+
+
+    function drawLineChart() {
+
+        // Data
+        var data = google.visualization.arrayToDataTable([
+            ['?????', '????????'],
+            ['1/2',  1000],
+            ['2/2',  1170],
+            ['3/2',  660],
+            ['4/2',  1030],
+            ['5/2',  1200],
+            ['6/2',  1300],
+            ['7/2',  1500],
+            ['8/2',  1000]
+        ]);
+
+        // Options
+        var options = {
+            fontName: 'Roboto',
+            height: 400,
+            curveType: 'function',
+            fontSize: 12,
+            chartArea: {
+                left: '5%',
+                width: '90%',
+                height: 350
+            },
+            pointSize: 4,
+            tooltip: {
+                textStyle: {
+                    fontName: 'Roboto',
+                    fontSize: 13
+                }
+            },
+            vAxis: {
+                title: '????? ????????',
+                titleTextStyle: {
+                    fontSize: 13,
+                    italic: false
+                },
+                gridlines:{
+                    color: '#e5e5e5',
+                    count: 10
+                },
+                minValue: 0
+            },
+            legend: {
+                position: 'top',
+                alignment: 'center',
+                textStyle: {
+                    fontSize: 12
+                }
+            }
+        };
+
+        // Draw chart
+        var line_chart = new google.visualization.LineChart($('#google-line')[0]);
+
+        line_chart.draw(data, options);
+    }
+    function drawLineChart2() {
+
+        // Data
+        var data = google.visualization.arrayToDataTable([
+            ['?????', '??????'],
+            ['1/2',  1000],
+            ['2/2',  1170],
+            ['3/2',  660],
+            ['4/2',  1030],
+            ['5/2',  1200],
+            ['6/2',  1300],
+            ['7/2',  1500],
+            ['8/2',  1000]
+        ]);
+
+        // Options
+        var options = {
+            fontName: 'Roboto',
+            height: 400,
+            curveType: 'function',
+            fontSize: 12,
+            chartArea: {
+                left: '5%',
+                width: '90%',
+                height: 350
+            },
+            pointSize: 4,
+            tooltip: {
+                textStyle: {
+                    fontName: 'Roboto',
+                    fontSize: 13
+                }
+            },
+            vAxis: {
+                title: '?????? ??????? ???????',
+                titleTextStyle: {
+                    fontSize: 13,
+                    italic: false
+                },
+                gridlines:{
+                    color: '#e5e5e5',
+                    count: 10
+                },
+                minValue: 0
+            },
+            legend: {
+                position: 'top',
+                alignment: 'center',
+                textStyle: {
+                    fontSize: 12
+                }
+            }
+        };
+
+        // Draw chart
+        var line_chart2 = new google.visualization.LineChart($('#googletransfer')[0]);
+
+        line_chart2.draw(data, options);
+    }
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawPie);
+    function drawPie() {
+
+        // Data
+        var data = google.visualization.arrayToDataTable([
+            ['???????', 'Hours per Day'],
+            ['???',     11],
+            ['??????',      2],
+            ['???',  2],
+            ['????', 2],
+            ['?????',    7]
+        ]);
+
+        // Options
+        var options_pie = {
+            fontName: 'Roboto',
+            height: 300,
+            width: 500,
+            chartArea: {
+                left: 50,
+                width: '90%',
+                height: '90%'
+            }
+        };
+
+
+        // Instantiate and draw our chart, passing in some options.
+        var pie = new google.visualization.PieChart($('#google-pie')[0]);
+        pie.draw(data, options_pie);
+    }
+
+</script>
 @stop
 @section('content')
           <div class="content">
             <!-- Main charts -->
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-6">
 
                     <!-- Traffic sources -->
                     <div class="panel panel-flat">
@@ -62,7 +230,7 @@
                                             <a href="#" class="btn border-teal text-teal btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i class="icon-plus3"></i></a>
                                         </li>
                                         <li class="text-left">
-                                            <div class="text-semibold">New visitors</div>
+                                            <div class="text-semibold">Total Markers</div>
                                             <div class="text-muted">2,349 avg</div>
                                         </li>
                                     </ul>
@@ -78,7 +246,7 @@
                                             <a href="#" class="btn border-warning-400 text-warning-400 btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i class="icon-watch2"></i></a>
                                         </li>
                                         <li class="text-left">
-                                            <div class="text-semibold">New sessions</div>
+                                            <div class="text-semibold">Total Users </div>
                                             <div class="text-muted">08:20 avg</div>
                                         </li>
                                     </ul>
@@ -106,63 +274,103 @@
                             </div>
                         </div>
 
-                        <div class="position-relative" id="traffic-sources"></div>
+
+
+                            <div class="chart-container">
+                                <div class="chart" id="googletransfer"></div>
+                            </div>
+
                     </div>
                     <!-- /traffic sources -->
 
                 </div>
 
-                <div class="col-lg-5">
+                <div class="col-lg-6">
 
                     <!-- Sales stats -->
-                    <div class="panel panel-flat">
-                        <div class="panel-heading">
-                            <h6 class="panel-title">Sales statistics</h6>
-                            <div class="heading-elements">
-                                <form class="heading-form" action="#">
-                                    <div class="form-group">
-                                        <select class="change-date select-sm" id="select_date">
-                                            <optgroup label="<i class='icon-watch pull-right'></i> Time period">
-                                                <option value="val1">June, 29 - July, 5</option>
-                                                <option value="val2">June, 22 - June 28</option>
-                                                <option value="val3" selected="selected">June, 15 - June, 21</option>
-                                                <option value="val4">June, 8 - June, 14</option>
-                                            </optgroup>
-                                        </select>
-                                    </div>
-                                </form>
-                            </div>
+
+
+
+                        <div class="chart-container">
+                            <div class="chart" id="google-pie"></div>
                         </div>
+                    <br><br>
+                    <div class="row">
+                        <div class="col-lg-4">
 
-                        <div class="container-fluid">
-                            <div class="row text-center">
-                                <div class="col-md-4">
-                                    <div class="content-group">
-                                        <h5 class="text-semibold no-margin"><i class="icon-calendar5 position-left text-slate"></i> 5,689</h5>
-                                        <span class="text-muted text-size-small">orders weekly</span>
+                            <!-- Members online -->
+                            <div class="panel bg-teal-400">
+                                <div class="panel-body">
+                                    <div class="heading-elements">
+                                        <span class="heading-text badge bg-teal-800">+53,6%</span>
                                     </div>
+
+                                    <h3 class="no-margin">3,450</h3>
+                                    No of 3D Modelss
+                                    <div class="text-muted text-size-small">489 avg</div>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <div class="content-group">
-                                        <h5 class="text-semibold no-margin"><i class="icon-calendar52 position-left text-slate"></i> 32,568</h5>
-                                        <span class="text-muted text-size-small">orders monthly</span>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="content-group">
-                                        <h5 class="text-semibold no-margin"><i class="icon-cash3 position-left text-slate"></i> $23,464</h5>
-                                        <span class="text-muted text-size-small">average revenue</span>
-                                    </div>
+                                <div class="container-fluid">
+                                    <div id="members-online"></div>
                                 </div>
                             </div>
+                            <!-- /members online -->
+
                         </div>
 
-                        <div class="content-group-sm" id="app_sales"></div>
-                        <div id="monthly-sales-stats"></div>
+                        <div class="col-lg-4">
+
+                            <!-- Current server load -->
+                            <div class="panel bg-pink-400">
+                                <div class="panel-body">
+                                    <div class="heading-elements">
+                                        <ul class="icons-list">
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cog3"></i> <span class="caret"></span></a>
+                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                    <li><a href="#"><i class="icon-sync"></i> Update data</a></li>
+                                                    <li><a href="#"><i class="icon-list-unordered"></i> Detailed log</a></li>
+                                                    <li><a href="#"><i class="icon-pie5"></i> Statistics</a></li>
+                                                    <li><a href="#"><i class="icon-cross3"></i> Clear list</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <h3 class="no-margin">49.4%</h3>
+                                    No of 3D Images
+                                    <div class="text-muted text-size-small">34.6% avg</div>
+                                </div>
+
+                                <div id="server-load"></div>
+                            </div>
+                            <!-- /current server load -->
+
+                        </div>
+
+                        <div class="col-lg-4">
+
+                            <!-- Today's revenue -->
+                            <div class="panel bg-blue-400">
+                                <div class="panel-body">
+                                    <div class="heading-elements">
+                                        <ul class="icons-list">
+                                            <li><a data-action="reload"></a></li>
+                                        </ul>
+                                    </div>
+
+                                    <h3 class="no-margin">$18,390</h3>
+                                    No of 3D Videos
+                                    <div class="text-muted text-size-small">$37,578 avg</div>
+                                </div>
+
+                                <div id="today-revenue"></div>
+                            </div>
+                            <!-- /today's revenue -->
+
+                        </div>
                     </div>
-                    <!-- /sales stats -->
+
 
                 </div>
             </div>

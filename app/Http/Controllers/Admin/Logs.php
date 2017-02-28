@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Marker;
+use App\Log;
 use App\Models;
 
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 use Panoscape\Vuforia\VuforiaWebService;
 
 
-class Markers extends Controller
+class Logs extends Controller
 {
     public function __construct()
     {
@@ -21,15 +21,15 @@ class Markers extends Controller
     }
     public function index(VuforiaWebService $vws)
     {
-        $user=\Session::get('adminid');
         $role=\Session::get('adminrole');
-        if($role!='admin') {
-            $categories = Marker::where('user_id', '=', $user)->orderBy('id', 'ASC')->get();
+        if($role=='admin') {
+            $categories = Log::get();
+            return view('admin.logs.index',['categories'=>$categories]);
         }
         else{
-            $categories = Marker::orderBy('id', 'ASC')->get();
+            return redirect()->back();
         }
-            return view('admin.markers.index',['categories'=>$categories]);
+
 
     }
 
@@ -37,7 +37,7 @@ class Markers extends Controller
     {
 
 
-        return view('admin.markers.add');
+        return view('admin.logs.add');
         //
     }
     public function edit($id)
@@ -123,7 +123,6 @@ class Markers extends Controller
         }
         $category->save();
         $marker_id=$category->id;
-        $this->insertlog( \Session::get('name'),'Add New Marker',$category->id,$request->name);
         if(!empty($models3d)) {
             for ($i = 0; $i < count($models3d); $i++) {
                 $model = new Models;
@@ -212,7 +211,6 @@ class Markers extends Controller
         }
         $category->save();
         $marker_id=$category->id;
-        $this->insertlog( \Session::get('name'),'Update  Marker',$id,$request->name);
         if(!empty($models3d)) {
             for ($i = 0; $i < count($models3d); $i++) {
                 $model = new Models;
@@ -226,7 +224,6 @@ class Markers extends Controller
        }
     public function destroy($id,VuforiaWebService $vws){
         $category = Marker::findOrFail($id);
-        $this->insertlog( \Session::get('name'),'Remove  Marker',$id,$category->title);
         $models = Models::where('marker_id',$category->id)->first();
         $vws->deleteTarget($category->vws_id);
 

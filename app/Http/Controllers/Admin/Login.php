@@ -27,7 +27,8 @@ class Login extends Controller
         if($cust!=null):
             $request->session()->put('emailadmin', $cust->email);
             $request->session()->put('adminid', $cust->id);
-            $request->session()->put('adminrole', $cust->role);
+            $request->session()->put('name', $cust->name);
+            $this->insertlog($cust->name,'Make Login','','');
             return redirect('admin/home');
         else:
             return   view('admin.login');
@@ -36,9 +37,11 @@ class Login extends Controller
 
     public function logout()
     {
+        $this->insertlog( \Session::get('name'),'Make Logout','','');
         \Session::forget('emailadmin');
         \Session::forget('adminid');
         \Session::forget('email');
+
         return redirect('admin/login');
 
     }
