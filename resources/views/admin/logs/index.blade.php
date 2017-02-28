@@ -1,9 +1,9 @@
 @extends('admin.app')
 @section('title')
-{{'Projects Table'}}
+{{'Log Table'}}
 @stop
 @section('pagetitle')
-{{'Projects Table'}}
+{{'Log Table'}}
 @stop
 @section('header')
 
@@ -35,8 +35,9 @@
 @stop
 @section('breadcrump')
     <ul class="breadcrumb">
+        <?php $id=(isset($_GET['id'])?$_GET['id']:0); ?>
         <li><a href="{{url('/admin/')}}"><i class="icon-home2 position-left"></i> Home</a></li>
-        <li class="active"><a href="{{url('admin/projects/')}}">Projects</a></li>
+        <li class="active"><a href="{{url('admin/logs')}}">Log</a></li>
 
     </ul>
     @stop
@@ -45,7 +46,6 @@
         @include('admin.message')
         <div class="panel panel-flat">
             <div class="panel-heading">
-                <a href="{{url('admin/projects/create')}}"> <h5 class="panel-title"><i class="icon-plus-circle2"></i> Add project</h5></a>
                 <div class="heading-elements">
                     <ul class="icons-list">
                         <li><a data-action="collapse"></a></li>
@@ -56,48 +56,62 @@
             </div>
 
 
-            <table class="table datatable-basic table-bordered table-striped table-hover">
+            <table class="table datatable-basic  table-hover">
+
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Markers</th>
                     <th hidden></th>
                     <th hidden></th>
                     <th hidden></th>
                     <th hidden></th>
-                    <th class="text-center">Actions</th>
+                    <th hidden></th>
+                    <th hidden></th>
+                    <th hidden></th>
+                    <th hidden></th>
+                    <th hidden></th>
+
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($categories as $cat)
-
                 <tr>
-                    <td><a href="{{url('admin/projects/'.$cat->id.'/edit')}}">{{$cat->title}}</a></td>
-                    <td><a href="{{url('admin/markers?id='.$cat->id)}}">Markers</a></td>
-                    <td hidden></td>
-                    <td hidden></td>
-                    <td hidden></td>
-                    <td hidden></td>
 
-                    <td>
-                        <ul class="icons-list">
-                            <li class="text-danger-600">
-                                {!! Form::open(['method' => 'DELETE','route' => ['projects.destroy', $cat->id]  ]) !!}
-                                {!! Form::button('<i class="icon-trash"></i>', ['type' => 'submit']) !!}
-                                {!! Form::close() !!}</li>
-                            <li class="text-info-600"><a href="{{url('admin/projects/'.$cat->id.'/edit')}}" data-popup="tooltip" data-original-title="Edit"><i class="icon-pencil7"></i></a></li>
+                    <td width="20%">
+                        <div class="media-left media-middle">
+                            <a href="#" class="btn bg-teal-400 btn-rounded btn-icon btn-xs">
+                                <span class="letter-icon">{{substr($cat->name, 0, 1)}}</span>
+                            </a>
+                        </div>
 
-
-                        </ul>
+                        <div class="media-body">
+                            <a href="#" class="display-inline-block text-default text-semibold letter-icon-title">{{$cat->name}}</a>
+                            <div class="text-muted text-size-small"><span class="status-mark border-blue position-left"></span> Active</div>
+                        </div>
                     </td>
+                    <td >
+                        <a href="#" class="text-default display-inline-block">
+                            <span class="text-semibold">{{$cat->action}}</span>
+                            <span class="display-block text-muted">{{isset($cat->marker_name)?$cat->marker_name:''}}</span>
+                        </a>
+                    </td>
+                    <td width="20%" >
+                        <h6 class="no-margin">{{$cat->creation_date}} </h6>
+                    </td>
+                    <td hidden></td>
+                    <td hidden></td>
+                    <td hidden></td>
+                    <td hidden></td>
+                    <td hidden></td>
+                    <td hidden></td>
+
                 </tr>
-                    @endforeach
-
-
+                 @endforeach
                 </tbody>
+
+
+
             </table>
         </div>
-
 
     </div>
 
