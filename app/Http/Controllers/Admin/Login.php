@@ -28,6 +28,7 @@ class Login extends Controller
             $request->session()->put('emailadmin', $cust->email);
             $request->session()->put('adminid', $cust->id);
             $request->session()->put('name', $cust->name);
+            $request->session()->put('adminrole', $cust->role);
             $this->insertlog($cust->name,'Make Login','','');
             return redirect('admin/home');
         else:
