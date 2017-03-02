@@ -170,15 +170,15 @@
                             <label class="col-lg-2 display-block text-semibold">Marker Options</label>
                             <div class="col-lg-10">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" class="styled" id="360image" {{($marker->image360==''?'checked':'')}}>
+                                    <input type="checkbox" class="styled" id="360image" {{($marker->image360!=''?'checked':'')}}>
                                     360 Image
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" class="styled" id="360video" {{($marker->video360==''?'checked':'')}}>
+                                    <input type="checkbox" class="styled" id="360video" {{($marker->video360!=''?'checked':'')}}>
                                     360 Video
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" class="styled" id="gps" {{($marker->lat==''?'checked':'')}}>
+                                    <input type="checkbox" class="styled" id="gps" {{($marker->lat!=''?'checked':'')}}>
                                     GPS Location
                                 </label>
 
