@@ -97,6 +97,7 @@ class Markers extends Controller
         }
         $data=array('data'=>$modeles);
         $new_meta=json_encode($data);
+        $medta='';
         if(!empty($modeles)){
             $medta=stripslashes($new_meta);
         }else{

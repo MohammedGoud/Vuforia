@@ -22,7 +22,7 @@ class Targets extends Controller
 
        $id=$_GET['id'];
         echo "<pre>";
-        print_r($vws->getTarget('3862212494bc4c1bbe9152c2bbb59952'));
+        print_r($vws->getTarget($id));
         echo "<pre>";
 
 
