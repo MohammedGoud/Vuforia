@@ -1,9 +1,9 @@
 @extends('admin.app')
 @section('title')
-    {{'Add Marker'}}
+    {{'Edit Marker'}}
 @stop
 @section('pagetitle')
-    {{'Add Marker'}}
+    {{'Edit Marker'}}
 @stop
 @section('header')
     <style>
@@ -191,7 +191,7 @@
                                     @if($marker->image360)
                                     <div class="file-preview-thumbnails">
                                         <div class="file-preview-frame" id="preview-1487703278765-0">
-                                            <img src="{{url('/markers/'.$marker->image360)}}" class="file-preview-image"  style="width:auto;height:160px;">
+                                            <img src="{{url('/360/'.$marker->image360)}}" class="file-preview-image"  style="width:auto;height:160px;">
                                         </div>
                                     </div>
                                     @endif
@@ -211,7 +211,7 @@
                                     <div class="file-preview-thumbnails">
                                         <div class="file-preview-frame" id="preview-1487703278765-0">
                                             <video width="320" height="240" controls>
-                                                <source src="{{url('/markers/'.$marker->video360)}}}" type="video/mp4">
+                                                <source src="{{url('/360/'.$marker->video360)}}}" type="video/mp4">
                                             </video>
                                         </div>
                                     </div>
