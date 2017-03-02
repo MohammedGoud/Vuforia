@@ -62,6 +62,8 @@ class Markers extends Controller
         $models3d=array();
         $modeles[]=array('url'=>'lat'.$request->lat);
         $modeles[]=array('url'=>'long'.$request->long);
+        $modeles[]=array('url'=>$request->meta_data);
+
         if($request->hasFile('model')) {
             $path = public_path() . '/models/'.str_replace(' ','_',$request->name).'/';
             $files = Input::file('model');
@@ -101,7 +103,7 @@ class Markers extends Controller
         if(!empty($modeles)){
             $medta=stripslashes($new_meta);
         }else{
-            $medta=$request->meta_data;
+            $medta='';
         }
         $category->meta_data = $request->meta_data;
         if($request->hasFile('image')) {
@@ -151,7 +153,7 @@ class Markers extends Controller
         $models3d=array();
         $modeles[]=array('url'=>'lat'.$request->lat);
         $modeles[]=array('url'=>'long'.$request->long);
-
+        $modeles[]=array('url'=>$request->meta_data);
         if($request->hasFile('model')) {
             $path = public_path() . '/models/'.str_replace(' ','_',$request->name).'/';
             $files = Input::file('model');
@@ -191,7 +193,7 @@ class Markers extends Controller
             $medta=stripslashes($new_meta);
 
         }else{
-            $medta=$request->meta_data;
+            $medta='';
 
         }
         $category->meta_data = $request->meta_data;

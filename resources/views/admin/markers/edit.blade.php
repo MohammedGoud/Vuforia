@@ -145,7 +145,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group" id="3d_div" style="display: none">
+                        <div class="form-group" id="3d_div" style="display: {{($marker->meta_data=='3D Model'?'':'none')}}">
                             <label class="col-lg-2 control-label text-semibold">3D Models</label>
                             <div class="col-lg-10">
                                 <div class="form-group form-group-lg">
@@ -170,21 +170,21 @@
                             <label class="col-lg-2 display-block text-semibold">Marker Options</label>
                             <div class="col-lg-10">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" class="styled" id="360image">
+                                    <input type="checkbox" class="styled" id="360image" {{($marker->image360==''?'checked':'')}}>
                                     360 Image
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" class="styled" id="360video">
+                                    <input type="checkbox" class="styled" id="360video" {{($marker->video360==''?'checked':'')}}>
                                     360 Video
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" class="styled" id="gps">
+                                    <input type="checkbox" class="styled" id="gps" {{($marker->lat==''?'checked':'')}}>
                                     GPS Location
                                 </label>
 
                             </div>
                         </div>
-                        <div class="form-group" id="360image_div" style="display: none">
+                        <div class="form-group" id="360image_div" style="display: {{($marker->image360==''?'none':'')}}">
                             <label class="col-lg-2 control-label text-semibold">360 Image</label>
                             <div class="col-lg-10">
                                 <div class="form-group form-group-lg">
@@ -202,7 +202,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group" id="360video_div" style="display: none">
+                        <div class="form-group" id="360video_div" style="display: {{($marker->video360==''?'none':'')}}">
                             <label class="col-lg-2 control-label text-semibold">360 Video</label>
                             <div class="col-lg-10">
                                 <div class="form-group form-group-lg">
@@ -222,7 +222,7 @@
 
                             </div>
                         </div>
-                        <div class="form-group" id="gps_div" style="display: none">
+                        <div class="form-group" id="gps_div" style="display: {{($marker->lat==''?'none':'')}}">
                             <label class="col-lg-2 control-label text-semibold">GPS Locations</label>
                             <div class="col-lg-10">
                                 <input id="searchInput" class="controls" type="text" placeholder="Enter a location" name="address" value="{{$marker->address}}">
