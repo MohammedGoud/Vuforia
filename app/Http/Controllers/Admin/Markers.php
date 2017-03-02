@@ -113,6 +113,7 @@ class Markers extends Controller
             $new_image = strtolower(str_random(15)) . '.' . $ext;
             rename($path . $imageName, $path . $new_image);
             $category->url = $new_image;
+            dd($medta);
             $tar=$vws->addTarget([
                 'name' => str_replace(' ','_',$request->name),
                 'width' => 150,
