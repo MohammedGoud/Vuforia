@@ -121,7 +121,7 @@ class Markers extends Controller
                 'metadata'=>$medta
             ]);
             $atgg=json_decode($tar['body']);
-            dd($atgg);
+            dd($tar);
             $category->vws_id = $atgg->target_id;
         }
         $category->save();
