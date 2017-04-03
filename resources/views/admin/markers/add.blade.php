@@ -110,7 +110,7 @@
             </div>
 
             <div class="panel-body">
-                <form class="form-horizontal form-validate-jquery" action="{{url('admin/markers/')}}" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal form-validate-jquery" action="{{url('admin/markers/')}}" method="post" enctype="multipart/form-data" onSubmit="return validate();">
                     {{csrf_field()}}
                     <fieldset class="content-group">
                         <div class="form-group">
@@ -135,7 +135,8 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label text-semibold">Marker Image :<span class="text-danger">*</span></label>
                             <div class="col-lg-10">
-                                <input type="file" class="file-styled" accept="image" name="image" data-show-upload="no" required>
+                                <input type="file" class="file-styled" accept="image" id="fileUpload" name="image" data-show-upload="no" size="5M" required>
+                                <span id="file_error" class="validation-error-label"></span>
                             </div>
                         </div>
 
@@ -221,7 +222,7 @@
 
                     <div class="text-right">
                         <button type="reset" class="btn btn-default" id="reset">Reset <i class="icon-reload-alt position-right"></i></button>
-                        <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
+                        <button type="submit" class="btn btn-primary" >Submit <i class="icon-arrow-right14 position-right"></i></button>
                     </div>
                 </form>
             </div>
@@ -229,7 +230,36 @@
 
 
     </div>
+    <script type="text/javascript">
 
+        function validate() {
+            $("#file_error").html("");
+            $(".demoInputBox").css("border-color","#F0F0F0");
+            var file_size = $('#fileUpload')[0].files[0].size;
+            if(file_size>4097152) {
+                $("#file_error").html("File size is greater than 5MB");
+                $(".demoInputBox").css("border-color","#FF0000");
+                return false;
+            }
+            return true;
+        }
+        function Upload() {
+            var fileUpload = document.getElementById("fileUpload");
+            if (typeof (fileUpload.files) != "undefined") {
+                var size = parseFloat(fileUpload.files[0].size / 1024/1024).toFixed(2);
+                if(size>2){
+                    alert('Your Image Must Be Less Than 5 MB');
+                    $("form").submit(function(e){
+                        e.preventDefault()
+                    })
+                }else{
+
+                }
+            } else {
+                alert("This browser does not support HTML5.");
+            }
+        }
+    </script>
 
 
     <script>

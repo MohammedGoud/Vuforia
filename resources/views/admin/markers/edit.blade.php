@@ -201,7 +201,6 @@
 
                             </div>
                         </div>
-
                         <div class="form-group" id="360video_div" style="display: {{($marker->video360==''?'none':'')}}">
                             <label class="col-lg-2 control-label text-semibold">360 Video</label>
                             <div class="col-lg-10">
